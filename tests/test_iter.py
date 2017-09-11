@@ -33,3 +33,29 @@ def test_list_dirs():
     assert sub_dir in dirs
     assert grand_dir in dirs
     shutil.rmtree(path)
+
+
+def test_list_files():
+    path = os.path.join(candy_path.CWD, faker.random_string())
+    sub_file = os.path.join(path, faker.random_string())
+    helper.touch(sub_file)
+
+    files = iter.list_files(path, recursion=False)
+    assert isinstance(files, types.GeneratorType)
+    files = list(files)
+    assert len(files) == 1
+    assert sub_file in files
+    shutil.rmtree(path)
+
+    path = os.path.join(candy_path.CWD, faker.random_string())
+    sub_dir = os.path.join(path, faker.random_string())
+    grand_file = os.path.join(sub_dir, faker.random_string())
+    helper.touch(grand_file)
+
+    files = iter.list_files(path, recursion=True)
+    assert isinstance(files, types.GeneratorType)
+    files = list(files)
+    assert len(files) == 1
+    assert grand_file in files
+    shutil.rmtree(path)
+
