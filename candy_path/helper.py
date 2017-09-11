@@ -9,3 +9,10 @@ def mkdirs(path):
     os.makedirs(path)
 
 
+def touch(path):
+    if os.path.exists(path) and os.path.isfile(path):
+        return
+    fd = open(path, 'w')
+    fd.close()
+
+
