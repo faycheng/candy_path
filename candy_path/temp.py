@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import uuid
 
 
 class TempDir(object):
@@ -16,7 +17,7 @@ class TempFile(object):
     @property
     def fd(self):
         if self._fd is None:
-            self._fd = open(self.path, 'w')
+            self._fd = open(self.path, 'w+')
         return self._fd
 
     def close(self):
@@ -32,4 +33,13 @@ class TempFile(object):
         os.remove(self.path)
 
 
+class TempPipe(TempFile):
+    def __init__(self, name=None):
+        super(TempPipe, self).__init__(name, suffix='pipe')
+
+    @property
+    def pipe(self):
+        if self._fd is None:
+            self._fd = open(self.path, 'wb+')
+        return self._fd
 
