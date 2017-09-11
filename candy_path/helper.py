@@ -12,6 +12,8 @@ def mkdirs(path):
 def touch(path):
     if os.path.exists(path) and os.path.isfile(path):
         return
+    if not os.path.exists(get_parent_path(path, 1)):
+        mkdirs(get_parent_path(path, 1))
     fd = open(path, 'w')
     fd.close()
 
