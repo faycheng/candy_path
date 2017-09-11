@@ -16,3 +16,8 @@ def touch(path):
     fd.close()
 
 
+def get_parent_path(path, depth=1):
+    parent_path = path
+    for _ in range(depth):
+        parent_path = os.path.abspath(os.path.dirname(parent_path))
+    return parent_path
