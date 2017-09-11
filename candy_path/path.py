@@ -34,5 +34,5 @@ class Path(object):
         if '.' not in self.name:
             return ''
         return self.name.split('.')[-1]
-    
+
 
