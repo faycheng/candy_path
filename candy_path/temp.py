@@ -16,16 +16,16 @@ class TempFile(object):
 
     @property
     def fd(self):
-        if self._fd is None:
-            self._fd = open(self.path, 'w+')
         return self._fd
 
     def close(self):
         if self._close is True:
             return
         self.fd.close()
+        self._close = True
 
     def __enter__(self):
+        self._fd = open(self.path, 'w+')
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
