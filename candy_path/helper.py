@@ -6,7 +6,10 @@ import os
 def mkdirs(path):
     if os.path.exists(path) and os.path.isdir(path):
         return
-    os.makedirs(path)
+    if hasattr(os, 'mkdirs'):
+        os.makedirs(path)
+        return
+    os.system('mkdir -p {}'.format(path))
 
 
 def touch(path):
