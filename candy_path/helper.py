@@ -26,3 +26,9 @@ def get_parent_path(path, depth=1):
     for _ in range(depth):
         parent_path = os.path.abspath(os.path.dirname(parent_path))
     return parent_path
+
+
+def save(content, file):
+    mkdirs(get_parent_path(file))
+    with open(file, 'w+') as fp:
+        fp.write(''.join(content))
